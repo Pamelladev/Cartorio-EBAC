@@ -92,86 +92,105 @@ int consulta()
 
 int deletar()
 { 
-
 	char cpf[40];
 	
-    printf("Digite o CPF do usuário a ser deletado: ");
-    scanf("%s",cpf);
-	
-	remove(cpf);
+	printf("Digite o CPF do usuário a ser deletado: ");
+	scanf("%s",cpf);
 		
-	FILE *file;
+		
+	
+	FILE *file;	
 	file = fopen(cpf,"r");
 	
-	
-	
-	if(file == NULL);
+	if(file == NULL)
 	{
 		printf("O usuário não se encontra no sistema!.\n");
 		system("pause");
 	}
-	
-	
-
-	
+	else
+	{
+		fclose(file);
+		remove(cpf);
+		FILE *file;	
+		file = fopen(cpf,"r");
+		if(file == NULL)
+		{
+			printf("Usuário deletado com sucesso!.\n");
+			system("pause");
+		}
+	}
+	fclose(file);
 }
 		
-
 
 int main()
 {
 	int opcao=0; //Definindo variáveis
 	int laco=1;
+	char senhadigitada[10]="a";
+	int comparacao;
 	
-	for(laco=1;laco=1;)
-	{
+	printf("___Cartório da EBAC____\n\n");
+	printf("Login de administrador!\n\nDigite sua senha: ");
+	scanf("%s",senhadigitada);
+	
+	comparacao = strcmp(senhadigitada,"admin");
+	
+	if(comparacao ==0)
+	{	
+	
 		system("cls");
+  		for(laco=1;laco=1;)
+		{
+		
 		
 	
-        setlocale(LC_ALL,"portuguese");// Definindo a linguagem 
+        	setlocale(LC_ALL,"portuguese");// Definindo a linguagem 
 	
-    	printf("___Cartório da EBAC____\n\n");
-	    printf("Escolha a opção desejada no menu:\n\n");
-    	printf("\t1- Registrar Nomes\n");
-    	printf("\t2- Consultar Nomes\n");
-    	printf("\t3- Deletar Nomes\n");
-    	printf("\t4- Sair do Sistema\n\n");
-    	printf("opção: ");//fim do menu
+    		printf("___Cartório da EBAC____\n\n");
+	    	printf("Escolha a opção desejada no menu:\n\n");
+    		printf("\t1- Registrar Nomes\n");
+    		printf("\t2- Consultar Nomes\n");
+    		printf("\t3- Deletar Nomes\n");
+    		printf("\t4- Sair do Sistema\n\n");
+    		printf("opção: ");//fim do menu
     	
 	
-    	scanf("%d", &opcao);//pausa o programa até decisão do usuário
+    		scanf("%d", &opcao);//pausa o programa até decisão do usuário
 	
-    	system("cls");//Deleta as informações anteriores(para tela ficar mais limpa)
+    		system("cls");//Deleta as informações anteriores(para tela ficar mais limpa)
     	
-    	switch(opcao)
-    	{
-    		case 1:
-    	    registro();
-		    break;
+    		switch(opcao)
+    		{
+    			case 1:
+    		    registro();
+			    break;
 		    
-		    case 2:
-		    consulta();
-	     	break;
+			    case 2:
+			    consulta();
+	   		  	break;
 	     	
-	     	case 3:
-			deletar();
-	        break;
+	   		  	case 3:
+				deletar();
+	  	        break;
 	        
-	        case 4:
-	        printf("Obrigada por utilizar o sistema!\n");
-			return 0;
-			break;	
+	  	        case 4:
+	  	        printf("Obrigada por utilizar o sistema!\n");
+			    return 0;
+		   	    break;	
 	        
-	        default:
-	        printf("Essa opção não está disponível!\n");
-	    	system("pause");
-	    	break;
+	  	        default:
+	  	        printf("Essa opção não está disponível!\n");
+	   		    system("pause");
+	  	  	    break;
 	        	
 	     		
-    	}
+    		}
+		}
+	
 	}
 	
-		
-
+	else
+		printf("Senha incorreta!");
 }
 
